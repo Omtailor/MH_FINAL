@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 0 84% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 91% 53%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 20% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 0 84% 50%;
+
+    --radius: 0.75rem;
+
+    /* Emergency colors */
+    --emergency-red: 0 84% 50%;
+    --emergency-red-light: 0 86% 97%;
+    --emergency-orange: 25 95% 53%;
+    --emergency-orange-light: 25 100% 95%;
+    --emergency-blue: 217 91% 53%;
+    --emergency-blue-light: 217 91% 95%;
+    --emergency-green: 142 71% 45%;
+    --emergency-green-light: 142 76% 95%;
+    --emergency-yellow: 45 93% 47%;
+
+    /* Gradients */
+    --gradient-emergency: linear-gradient(135deg, hsl(0, 84%, 50%) 0%, hsl(0, 84%, 40%) 100%);
+    --gradient-rescuer: linear-gradient(135deg, hsl(217, 91%, 53%) 0%, hsl(217, 91%, 43%) 100%);
+
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 20% 14%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 20% 14%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 84% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 220 20% 18%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 0 84% 55%;
+
+    --sidebar-background: 220 20% 12%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 18%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .emergency-header {
+    background: var(--gradient-emergency);
+  }
+
+  .rescuer-header {
+    background: var(--gradient-rescuer);
+  }
+
+  .priority-critical {
+    @apply bg-[hsl(var(--emergency-red-light))] border-l-4 border-[hsl(var(--emergency-red))];
+  }
+
+  .priority-high {
+    @apply bg-[hsl(var(--emergency-orange-light))] border-l-4 border-[hsl(var(--emergency-orange))];
+  }
+
+  .priority-medium {
+    @apply bg-[hsl(var(--emergency-blue-light))] border-l-4 border-[hsl(var(--emergency-blue))];
+  }
+
+  .priority-low,
+  .priority-minimal {
+    @apply bg-[hsl(var(--emergency-green-light))] border-l-4 border-[hsl(var(--emergency-green))];
+  }
+
+  .news-item {
+    @apply border-l-4 border-[hsl(var(--emergency-red))] bg-[hsl(var(--emergency-red-light))];
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .pulse-emergency {
+    animation: pulse-red 2s infinite;
+  }
+
+  @keyframes pulse-red {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsla(0, 84%, 50%, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 10px hsla(0, 84%, 50%, 0);
+    }
+  }
+
+  .live-indicator {
+    @apply inline-flex items-center gap-1.5;
+  }
+
+  .live-indicator::before {
+    content: '';
+    @apply w-2 h-2 rounded-full bg-[hsl(var(--emergency-red))] animate-pulse;
+  }
+}
+
+@layer utilities {
+  .text-emergency {
+    @apply text-[hsl(var(--emergency-red))];
+  }
+
+  .text-rescuer {
+    @apply text-[hsl(var(--emergency-blue))];
+  }
+
+  .bg-emergency {
+    @apply bg-[hsl(var(--emergency-red))];
+  }
+
+  .bg-rescuer {
+    @apply bg-[hsl(var(--emergency-blue))];
+  }
+}
